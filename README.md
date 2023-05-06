@@ -15,18 +15,21 @@ cd examples
 python3 -m pip install -r requirements.txt
 ```
 ## Process data
+The input file is in .fasta format. For each sequence, the label of the sequence should be in the sequence ID. (example file can be dound in example_data folder).
+By running the following code, the input fasta file will be separated into train, dev and test sets. Each sequence will be tokenized into 3mer tokens.
 ```
 python preprocess.py \
   --data_dir <PATH_TO_YOUR_DATA> \
   --output_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
   --kmer 3
 ```
-## Train & Predict
+## Train
 ```
 python train.py \
   --data_dir <PATH_TO_YOUR_DATA> \
   --output_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
-  --model_type rnaprom \
+  --model_type 3utrprom \
+  --tokenizer_name rna3 \
   --model_name_or_path <PATH_TO_YOUR_MODEL> \
   --do_train \
   --per_gpu_train_batch_size 32 \
@@ -43,21 +46,22 @@ python train.py \
   --weight_decay 0.01 \
   --seed 6
 ```
+Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
+## Predict
 ```
 python predict.py \
-    --model_type 3utrprom \
-    --tokenizer_name rna3 \
-    --model_name_or_path  <PATH_TO_YOUR_MODEL>\
-    --task_name rnaprom \
-    --do_predict \
-    --data_dir $DATA_PATH  \
-    --max_seq_length 100 \
-    --per_gpu_pred_batch_size=128   \
-    --output_dir <PATH_TO_YOUR_MODEL> \
-    --predict_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
-    --n_process 48
+--data_dir <PATH_TO_YOUR_DATA> \
+--output_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
+--do_predict \
+--tokenizer_name rna3 \
+--model_type 3utrprom \
+--model_name_or_path <PATH_TO_YOUR_MODEL> \
+--max_seg_length 100 \
+--per_gpu_eval_batch_size 32
 ```
+Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
 ## Single resolution importance analysis
+The following code extracted the attention scores and visualizes them.
 ```
 python single_resolution_importance.py \
     --kmer 3 \
@@ -70,6 +74,7 @@ python single_resolution_importance.py \
 ```
 
 ## Motif analysis
+CHECK IF THIS IS NECESSARY
 ```
 python find_motifs.py \
     --data_dir <PATH_TO_YOUR_DATA> \
