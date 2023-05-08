@@ -318,37 +318,16 @@ if __name__ == "__main__":
             with torch.no_grad():
                 for batch_idx, data in enumerate(dataloaders[split], 0):
                     for each_item in data:
-                        print(each_item)
-                        print(len(each_item['ids']))
-                        ids = each_item['ids'].to(device, dtype=torch.long)
-                        mask = each_item['mask'].to(device, dtype=torch.long)
-                        token_type_ids = each_item['token_type_ids'].to(device,
-                                                                        dtype=torch.long)
-                        outputs = model(input_ids=ids, attention_mask=mask)
-                        attn_scores = outputs[-1]
-                        #print(len(attn_scores)) #12
-                        #print(attn_scores[-1].shape) #[5, 12, 512, 512]
-
-                        layer12_attn = attn_scores[-1]
-                        total_attn_8k = []
-                        for seq_seg in layer12_attn:
-                            print(seq_seg.shape) #[12, 512, 512]
-                            attn_averaged_heads = np.mean(np.array(seq_seg), axis=0)
-                            print(attn_averaged_heads.shape) #(512, 512)
-                            seq_attn = []
-                            for i in range(1, 511):
-                                seq_attn.append(attn_averaged_heads[0,i])
-                            single_nt_attn = get_real_score(seq_attn, 3, 'mean') # len 512
-                            print("realScore len: ", len(single_nt_attn))
-                            total_attn_8k.extend(single_nt_attn[:510])
-                        print("first length: ", )
-                        print("rest length: ", len(single_nt_attn[510:]))
-                        total_attn_8k.extend(single_nt_attn[510:])
-                        print(len(total_attn_8k))
-                        d_8k = np.pad(np.array(total_attn_8k), (0, 8162-len(total_attn_8k)), 'constant',
-                                   constant_values=(0, 0))
-                        print(len(d_8k))
-                        train_attn.append(d_8k[:8000, np.newaxis])
+                        ids = each_item['ids'].to(device, dtype = torch.long)
+                        mask = each_item['mask'].to(device, dtype = torch.long)
+                        token_type_ids = each_item['token_type_ids'].to(device, dtype = torch.long) 
+                        outputs = model(input_ids=ids,attention_mask=mask) 
+                        hidden_states = outputs[2]  
+                        hidden_states = (hidden_states[-1] + hidden_states[1]).cpu().numpy()
+                        transform_emb = remove_special_token(hidden_states, mask)
+                        embedding_pad = np.pad(transform_emb, ((0,fixed_length-transform_emb.shape[0]),(0,0)), 'mean')
+                        embedding_pad = np.mean(embedding_pad, axis=1)
+                        train_embedding.append(embedding_pad[:, np.newaxis])
 
 
 
@@ -356,6 +335,6 @@ if __name__ == "__main__":
     #########################################################################
 
     np.save(output_path + 'seq_to_extract' + str(dataset_num) + '.npy',
-            np.array(train_attn))
-    print(np.array(train_attn).shape)
+            np.array(train_embedding))
+    print(np.array(train_embedding).shape)
 
