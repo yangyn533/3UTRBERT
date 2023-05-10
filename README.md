@@ -90,33 +90,7 @@ python find_motifs.py \
 
 ## Mutation
 ```
-python mutate.py \
---seq_file <PATH_TO_SEQUENCE_FILE>\
---save_file_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
---k 3
-```
-```
-python predict.py \
-    --model_type 3utrprom \
-    --tokenizer_name rna3 \
-    --model_name_or_path  <PATH_TO_YOUR_MODEL>\
-    --task_name rnaprom \
-    --do_predict \
-    --data_dir $DATA_PATH  \
-    --max_seq_length 100 \
-    --per_gpu_pred_batch_size=128   \
-    --output_dir <PATH_TO_YOUR_MODEL> \
-    --predict_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
-    --n_process 48
-```
-
-```
-python calculate_diff_scores.py \
---orig_seq_file <PATH_TO_YOUR_OTIGINAL_SEQ_FILE> \
---orig_pred_file <PATH_TO_YOUR_OTIGINAL_SEQ_PREDICTION> \
---mut_seq_file <PATH_TO_YOUR_MUTATED_SEQ_FILE> \
---mut_pred_file <PATH_TO_YOUR_MUTATED_SEQ_PREDICTION> \
---save_file_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY>
+source mutation_heatmap.py
 ```
 remember to add the heatmap drawing codes
 
