@@ -1,14 +1,14 @@
-
 export KMER=3
-export MODEL_PATH=<>
-export ORIGINAL_SEQ_PATH=<>
-export PREDICTION_PATH=<>
-export MUTATE_SEQ_PATH=<>
-export WT_SEQ=<>
+export MODEL_PATH=<PATH_TO_YOUR_MODEL>
+export ORIGINAL_SEQ_PATH=<PATH_TO_YOUR_ORIGINAL_SEQUENCE_FILE>
+export MUTATE_SEQ_PATH=<PATH_TO_YOUR_MUTATED_SEQUENCE_FILE>
+export PREDICTION_PATH=<PATH_TO_STORE_PREDICTION>
+export WT_SEQ=<THE_SEQUENCE_USED_FOR_MUTATION>
+export OUTPUT_PATH=<PATH_TO_YOUR_OUTPUT_DIRECTORY>
 
 
 # mutate sequence
-python mutate_seqs.py --seq_file <PATH_TO_TSV_FILE> --save_file_dir <PATH_TO_OUTPUT_DIRECTORY> --k <KMER_USED>
+python mutate_seqs.py --seq_file $ORIGINAL_SEQ_PATH/test.tsv --save_file_dir $MUTATE_SEQ_PATH --k $KMER
 
 
 # predict on sequence
@@ -38,15 +38,15 @@ python predict.py \
 
 # calculate scores
 python calculate_diff_scores.py \
-  --orig_seq_file  $ORIGINAL_SEQ_PATH \
+  --orig_seq_file  $ORIGINAL_SEQ_PATH/test.tsv \
   --orig_pred_file  $PREDICTION_PATH/original_pred/pred_results.npy \
-  --mut_seq_file  $MUTATE_SEQ_PATH \
+  --mut_seq_file  $MUTATE_SEQ_PATH/test.tsv \
   --mut_pred_file $PREDICTION_PATH/mutate_pred/pred_results.npy \
-  --save_file_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY>
+  --save_file_dir $OUTPUT_PATH
 
 
 # draw heatmap
 python heatmap.py \
-  --score_file <PATH_TO_SCORE_TSV_FILE> \
-  --save_file_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
+  --score_file $OUTPUT_PATH \
+  --save_file_dir $OUTPUT_PATH \
   --wt_seq $WT_SEQ
