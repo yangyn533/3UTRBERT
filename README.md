@@ -1,4 +1,4 @@
-# 3UTRBERT
+# 3UTRBERT  Move transformers to src
 ## Environment Setup
 
 #### 1.1 Create and activate a new virtual environment
