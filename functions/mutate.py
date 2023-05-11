@@ -146,7 +146,7 @@ def main():
     mutated_dev.iloc[0, mutated_dev.columns.get_loc('label')] = 1
     mutated_dev = mutated_dev[['sequence','label','index']]
             
-    mutated_dev.to_csv(os.path.join(args.save_file_dir,'dev.tsv'),sep='\t',header=True, index=False)
+    mutated_dev.to_csv(os.path.join(args.save_file_dir,'.tsv'),sep='\t',header=True, index=False)
     
 
 if __name__ == "__main__":
