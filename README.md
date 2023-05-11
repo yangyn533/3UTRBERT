@@ -49,7 +49,7 @@ python train.py \
 ```
 Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
 ## Predict
-`predict.py` is used for producing prediction results from the fine-tuned model. The input data is the test.tsv. Make sure train.tsv, dev.tsv and test.tsv are in the same directory and input path to this directory as the `--data_dir` argument. `--model_name_or_path` needs to be the path to your fine-tuned model. The output file of `predict.py` are mainly pred_results.npy and `pred_results_scores.npy`. `pred_results.npy` stores the probability for each sequence. `pred_results_scores.npy` stores the metrics to evaluate the model.
+`predict.py` is used for producing prediction results from the fine-tuned model. The input data is the test.tsv. Make sure train.tsv, dev.tsv and test.tsv are in the same directory and input path to this directory as the `--data_dir` argument. `--model_name_or_path` needs to be the path to your fine-tuned model. The output files of `predict.py` are mainly `pred_results.npy` and `pred_results_scores.npy`. `pred_results.npy` stores the probability for each sequence. `pred_results_scores.npy` stores the metrics to evaluate the model.
 ```
 python predict.py \
 --data_dir <PATH_TO_YOUR_DATA> \
