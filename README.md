@@ -16,7 +16,7 @@ python3 -m pip install -r requirements.txt
 ```
 ## Process data
 The input file is in .fasta format. For each sequence, the label of the sequence should be in the sequence ID. (example file can be dound in example_data folder).
-By running the following code, the input fasta file will be separated into train, dev and test sets. Each sequence will be tokenized into 3mer tokens.
+By running the following code, the input fasta file will be separated into train, dev and test sets. Each sequence will be tokenized into 3mer tokens. Example data locates in the example/data folder. train.tsv is for training, dev.tsv for validation and test.tsv for test the performance.
 ```
 python preprocess.py \
   --data_dir <PATH_TO_YOUR_DATA> \
@@ -24,6 +24,7 @@ python preprocess.py \
   --kmer 3
 ```
 ## Train
+`train.py` is used for fine-tune the model. The input data is the train.tsv and dev.tsv. Make sure train.tsv and dev.tsv are in the same directory and input path to this directory as the `--data_dir` argument. `--model_name_or_path` needs to be the path to your pre-trained model. `--output_dir` is the location to store the fine-tuned model.
 ```
 python train.py \
   --data_dir <PATH_TO_YOUR_DATA> \
@@ -45,31 +46,10 @@ python train.py \
   --overwrite_output \
   --weight_decay 0.01 \
   --seed 6
-  
-  
-python train.py \
-  --data_dir /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/example/data \
-  --output_dir /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/output \
-  --model_type 3utrprom \
-  --tokenizer_name rna3 \
-  --model_name_or_path /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/3-new-12w-0 \
-  --do_train \
-  --per_gpu_train_batch_size 32 \
-  --per_gpu_eval_batch_size 32 \
-  --learning_rate 5e-5 \
-  --logging_steps 100 \
-  --save_steps 1000 \
-  --num_train_epochs 3 \
-  --evaluate_during_training \
-  --max_seq_length 100 \
-  --warmup_percent 0.1 \
-  --hidden_dropout_prob 0.1 \
-  --overwrite_output \
-  --weight_decay 0.01 \
-  --seed 6
 ```
 Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
 ## Predict
+`predict.py` is used for producing prediction results from the fine-tuned model. The input data is the test.tsv. Make sure train.tsv, dev.tsv and test.tsv are in the same directory and input path to this directory as the `--data_dir` argument. `--model_name_or_path` needs to be the path to your fine-tuned model.
 ```
 python predict.py \
 --data_dir <PATH_TO_YOUR_DATA> \
@@ -78,17 +58,6 @@ python predict.py \
 --tokenizer_name rna3 \
 --model_type 3utrprom \
 --model_name_or_path <PATH_TO_YOUR_MODEL> \
---max_seq_length 100 \
---per_gpu_eval_batch_size 32
-
-
-python predict.py \
---data_dir /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/example/data \
---output_dir /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/output \
---do_predict \
---tokenizer_name rna3 \
---model_type 3utrprom \
---model_name_or_path /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/output \
 --max_seq_length 100 \
 --per_gpu_eval_batch_size 32
 ```
