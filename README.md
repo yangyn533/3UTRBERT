@@ -96,5 +96,8 @@ remember to add the heatmap drawing codes
 
 ## Feature extraction
 ```
-remember to add the python file
+python extract_8000.py \
+    --data_path <PATH_TO_DATA> \
+    --output_path <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
+    --model_path <PATH_TO_YOUR_MODEL>
 ```
