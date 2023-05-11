@@ -45,6 +45,28 @@ python train.py \
   --overwrite_output \
   --weight_decay 0.01 \
   --seed 6
+  
+  
+python train.py \
+  --data_dir /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/example/data \
+  --output_dir /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/output \
+  --model_type 3utrprom \
+  --tokenizer_name rna3 \
+  --model_name_or_path /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/3-new-12w-0 \
+  --do_train \
+  --per_gpu_train_batch_size 32 \
+  --per_gpu_eval_batch_size 32 \
+  --learning_rate 5e-5 \
+  --logging_steps 100 \
+  --save_steps 1000 \
+  --num_train_epochs 3 \
+  --evaluate_during_training \
+  --max_seq_length 100 \
+  --warmup_percent 0.1 \
+  --hidden_dropout_prob 0.1 \
+  --overwrite_output \
+  --weight_decay 0.01 \
+  --seed 6
 ```
 Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
 ## Predict
@@ -56,6 +78,17 @@ python predict.py \
 --tokenizer_name rna3 \
 --model_type 3utrprom \
 --model_name_or_path <PATH_TO_YOUR_MODEL> \
+--max_seq_length 100 \
+--per_gpu_eval_batch_size 32
+
+
+python predict.py \
+--data_dir /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/example/data \
+--output_dir /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/output \
+--do_predict \
+--tokenizer_name rna3 \
+--model_type 3utrprom \
+--model_name_or_path /banana/zhanglab/gli/test_3utrbert/3UTRBERT-1/output \
 --max_seq_length 100 \
 --per_gpu_eval_batch_size 32
 ```
