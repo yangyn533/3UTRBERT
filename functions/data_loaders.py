@@ -4,14 +4,14 @@ import pickle
 from multiprocessing import Pool
 import numpy as np
 
-from torch.utils.data import DataLoader, Dataset, RandomSampler, SequentialSampler, TensorDataset
+from torch.utils.data import DataLoader, Dataset, SequentialSampler, TensorDataset
 from transformers import PreTrainedTokenizer
 from utils import logger
 from tqdm import tqdm
 
-from src.transformers import glue_convert_examples_to_features as convert_examples_to_features
-from src.transformers import glue_output_modes as output_modes
-from src.transformers import glue_processors as processors
+from functions.transformers import glue_convert_examples_to_features as convert_examples_to_features
+from functions.transformers import glue_output_modes as output_modes
+from functions.transformers import glue_processors as processors
 
 # Pretrain/General distillation
 class TextDataset(Dataset):
@@ -78,7 +78,7 @@ class LineByLineTextDataset(Dataset):
 
             with open(file_path, encoding="utf-8") as f:
                 lines = [line for line in f.read().splitlines() if (len(line) > 0 and not line.isspace())]
-            
+
             if args.n_process == 1:
                 self.examples = tokenizer.batch_encode_plus(lines, add_special_tokens=True, max_length=block_size)["input_ids"]
             else:
@@ -95,7 +95,7 @@ class LineByLineTextDataset(Dataset):
                 for i in range(n_proc):
                     results.append(p.apply_async(convert_line_to_example,[tokenizer, lines[indexes[i]:indexes[i+1]], block_size,]))
                     print(str(i) + " start")
-                p.close() 
+                p.close()
                 p.join()
 
                 self.examples = []
@@ -165,7 +165,7 @@ def load_and_cache_examples_3utr(args, task, tokenizer, evaluate=False, val=Fals
                 "test" if evaluate else "dev" if val else "train", str(args.max_seq_length), str(task),
             ),
         )
-    
+
     if viz:
         cached_features_file = os.path.join(
             args.data_dir,
@@ -173,8 +173,8 @@ def load_and_cache_examples_3utr(args, task, tokenizer, evaluate=False, val=Fals
                 "tata", str(300), str(task),
             ),
         )
-    
-    
+
+
     if os.path.exists(cached_features_file) and not args.overwrite_cache:
         logger.info("Loading features from cached file %s", cached_features_file)
         features = torch.load(cached_features_file)
@@ -182,7 +182,7 @@ def load_and_cache_examples_3utr(args, task, tokenizer, evaluate=False, val=Fals
         logger.info("Creating features from dataset file at %s", args.data_dir)
         label_list = processor.get_labels()
 
-        
+
         if viz:
             examples = (processor.get_tata_examples(args.data_dir))
         else:

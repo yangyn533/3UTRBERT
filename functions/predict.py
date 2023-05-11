@@ -17,48 +17,32 @@
 
 
 import argparse
-import glob
-import json
 import logging
 import os
 os.environ['CUDA_VISIBLE_DEVICES']='0'
 import random
-import re
-import shutil
-import sys
-import matplotlib.pyplot as plt
-import seaborn as sns
-from copy import deepcopy
-from multiprocessing import Pool
-from typing import Dict, List, Tuple
 
 #import neptune.new as neptune
 import numpy as np
 import torch
-from decouple import config
-from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset
-from torch.utils.data.distributed import DistributedSampler
-from tqdm import tqdm, trange
+from torch.utils.data import DataLoader, SequentialSampler
+from tqdm import tqdm
 from data_loaders import load_and_cache_examples_3utr as load_and_cache_examples
-from data_loaders import visualize
 
-
-from src.transformers import (
+from functions.transformers import (
     RNATokenizer
 )
 
 from transformers import (
     BertConfig,
     DistilBertConfig,
-    WEIGHTS_NAME,
-    AdamW,
     BertForSequenceClassification,
     DistilBertForSequenceClassification
 )
 
-from src.transformers import glue_compute_metrics as compute_metrics
-from src.transformers import glue_output_modes as output_modes
-from src.transformers import glue_processors as processors
+from functions.transformers import glue_compute_metrics as compute_metrics
+from functions.transformers import glue_output_modes as output_modes
+from functions.transformers import glue_processors as processors
 
 try:
     from torch.utils.tensorboard import SummaryWriter
