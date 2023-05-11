@@ -13,3 +13,4 @@ matplotlib
 seaborn
 python-decouple
 transformers
+pyfaidx
