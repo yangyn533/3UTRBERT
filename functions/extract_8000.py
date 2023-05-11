@@ -275,9 +275,32 @@ def get_real_score(attention_scores, kmer, metric):
 
     return real_scores
 
-if __name__ == "__main__":
-    data_path = '/Users/reagan/Desktop/3UTRBERT_visualiztion/final_mission/code_8000/test_data/'
-    output_path = '/Users/reagan/Desktop/3UTRBERT_visualiztion/final_mission/code_8000/output/'
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--data_path",
+        default=None,
+        type=str,
+        required=True,
+        help="path to the data folder",
+    )
+    parser.add_argument(
+        "--output_path",
+        default=None,
+        type=str,
+        required=True,
+        help="path to the output folder",
+    )
+    parser.add_argument(
+        "--model_path",
+        default=None,
+        type=str,
+        required=True,
+        help="path to the model folder",
+    )
+    args = parser.parse_args()
+    data_path = args.data_path
+    output_path = args.output_path
     dataset_num = 0
     classes = 7
     kmer = 3
@@ -289,7 +312,7 @@ if __name__ == "__main__":
     mk_dir(output_path)
 
     tokenizer = BertTokenizer.from_pretrained(
-        '/Users/reagan/Desktop/3UTRBERT_visualiztion/final_mission/code_8000/3-new-12w-0', do_lower_case=False)
+        args.model_path, do_lower_case=False)
     text_set, label_set, num_labels = prepare_data(data_path, dataset_num,
                                                    classes, kmer)
 
@@ -298,12 +321,12 @@ if __name__ == "__main__":
                                     tokenizer, max_length, batch_size,
                                     num_workers)
 
-    model = BertModel.from_pretrained('/Users/reagan/Desktop/3UTRBERT_visualiztion/final_mission/code_8000/3-new-12w-0/',
+    model = BertModel.from_pretrained(args.model_path,
                                       config=BertConfig.from_pretrained(
-                                          '/Users/reagan/Desktop/3UTRBERT_visualiztion/final_mission/code_8000/3-new-12w-0/',
+                                          args.model_path,
                                           output_attentions=True))
 
-    # model = BertModel.from_pretrained("/home/wangyansong/mRNA/3-new-12w-0/",output_hidden_states=True)
+    
     device = 'cuda' if cuda.is_available() else 'cpu'
     model = model.to(device)
     model = model.eval()
@@ -313,8 +336,8 @@ if __name__ == "__main__":
     test_attn = []
     print(dataloaders.keys())
     for each_id in ["seq_to_extract"]:
-        if each_id == 'seq_to_extract':
-            split = 'seq_to_extract'
+        if each_id == "seq_to_extract":
+            split = "seq_to_extract"
             with torch.no_grad():
                 for batch_idx, data in enumerate(dataloaders[split], 0):
                     for each_item in data:
@@ -328,13 +351,14 @@ if __name__ == "__main__":
                         embedding_pad = np.pad(transform_emb, ((0,fixed_length-transform_emb.shape[0]),(0,0)), 'mean')
                         embedding_pad = np.mean(embedding_pad, axis=1)
                         train_embedding.append(embedding_pad[:, np.newaxis])
-
-
-
-
-    #########################################################################
-
+    
     np.save(output_path + 'seq_to_extract' + str(dataset_num) + '.npy',
             np.array(train_embedding))
     print(np.array(train_embedding).shape)
+
+if __name__ == "__main__":
+    main()
+
+
+
 
