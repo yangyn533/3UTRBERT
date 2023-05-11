@@ -75,24 +75,9 @@ python single_resolution_importance.py \
     --save_path <PATH_TO_YOUR_OUTPUT_DIRECTORY>
 ```
 
-## Motif analysis
-CHECK IF THIS IS NECESSARY
+## Mutation analysis
 ```
-python find_motifs.py \
-    --data_dir <PATH_TO_YOUR_DATA> \
-    --predict_dir <PATH_TO_YOUR_PREDICTION_OUTPUT_DIRECTORY> \
-    --window_size 7 \
-    --min_len 5 \
-    --pval_cutoff 0.05 \
-    --min_n_motif 1 \
-    --align_all_ties \
-    --save_file_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
-    --verbose
-```
-
-## Mutation
-```
-source mutation_heatmap.py
+source mutation_heatmap.sh
 ```
 remember to add the heatmap drawing codes
 
@@ -102,4 +87,18 @@ python extract_8000.py \
     --data_path <PATH_TO_DATA> \
     --output_path <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
     --model_path <PATH_TO_YOUR_MODEL>
+```
+## Motif analysis
+The motif analysis requires the output of attentions. The required attention can be obtained from `single_resolution_importance.py`. Store the attention into the directory used as input `--predict_dir`.
+```
+python find_motifs.py \
+    --data_dir <PATH_TO_YOUR_DATA> \
+    --predict_dir <PATH_TO_YOUR_PREDICTION_OUTPUT_DIRECTORY> \
+    --window_size <ADJUST_THIS> \
+    --min_len <ADJUST_THIS> \
+    --pval_cutoff <ADJUST_THIS> \
+    --min_n_motif <ADJUST_THIS> \
+    --align_all_ties \
+    --save_file_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
+    --verbose
 ```
