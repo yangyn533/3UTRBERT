@@ -1,4 +1,4 @@
-# 3UTRBERT  Move transformers to src
+# 3UTRBERT  Move transformers to src, remember to change the URL in tokenization_rna.py as https://raw.githubusercontent.com/yangyn533/3UTRBERT-1/main/transformers/rnabert-config/bert-config-3/vocab.txt
 ## Environment Setup
 
 #### 1.1 Create and activate a new virtual environment
