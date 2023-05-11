@@ -52,14 +52,14 @@ Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the km
 `predict.py` is used for producing prediction results from the fine-tuned model. The input data is the test.tsv. Make sure train.tsv, dev.tsv and test.tsv are in the same directory and input path to this directory as the `--data_dir` argument (not include the file name itself). `--model_name_or_path` needs to be the path to your fine-tuned model. The output files of `predict.py` are mainly `pred_results.npy` and `pred_results_scores.npy`. `pred_results.npy` stores the probability for each sequence. `pred_results_scores.npy` stores the metrics to evaluate the model.
 ```
 python predict.py \
---data_dir <PATH_TO_YOUR_DATA> \
---output_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
---do_predict \
---tokenizer_name rna3 \
---model_type 3utrprom \
---model_name_or_path <PATH_TO_YOUR_MODEL> \
---max_seq_length 100 \
---per_gpu_eval_batch_size 32
+  --data_dir <PATH_TO_YOUR_DATA> \
+  --output_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
+  --do_predict \
+  --tokenizer_name rna3 \
+  --model_type 3utrprom \
+  --model_name_or_path <PATH_TO_YOUR_MODEL> \
+  --max_seq_length 100 \
+  --per_gpu_eval_batch_size 32
 ```
 Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
 ## Single resolution importance analysis
@@ -82,8 +82,11 @@ Before run the shell script. Make sure the parameters in the shell script are in
 source mutation_heatmap.sh
 ```
 The following commonds comes from `mutation_heatmap.sh`.
-WT_SEQ should be the same sequence in the original sequence file
-Please store the original sequence in a `.tsv` file called `test.tsv` 
+`KMER` indicates the kmer used. 
+`ORIGINAL_SEQ_PATH` should be the path the the folder where your sequence file locates (not include the file name itself).
+`MUTATE_SEQ_PATH` should be the folder your want to store the mutated sequence file (not include the file name itself). 
+`WT_SEQ` should be the same sequence in the original sequence file.
+Please store the original sequence in a `.tsv` file called `test.tsv` .
 ```
 export KMER=3
 export MODEL_PATH=<PATH_TO_YOUR_MODEL>
@@ -125,9 +128,9 @@ python predict.py \
 
 # calculate scores
 python calculate_diff_scores.py \
-  --orig_seq_file  $ORIGINAL_SEQ_PATH \ # include .tsv
+  --orig_seq_file  $ORIGINAL_SEQ_PATH/test.tsv \
   --orig_pred_file  $PREDICTION_PATH/original_pred/pred_results.npy \
-  --mut_seq_file  $MUTATE_SEQ_PATH \ # include .tsv
+  --mut_seq_file  $MUTATE_SEQ_PATH/test.tsv \
   --mut_pred_file $PREDICTION_PATH/mutate_pred/pred_results.npy \
   --save_file_dir $OUTPUT_PATH
 
@@ -138,7 +141,7 @@ python heatmap.py \
   --save_file_dir $OUTPUT_PATH \
   --wt_seq $WT_SEQ
 ```
-remember to add the heatmap drawing codes
+
 
 ## Feature extraction
 ```
