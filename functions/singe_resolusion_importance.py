@@ -57,7 +57,7 @@ def get_attention_3utr(model, tokenizer, sentence_a, start, end):
     for i in range(1, len(tokens)-1):
         help = attn[start:end+1,:,0,i]
         # print(help)
-        attn_score.append(float(attn[start:end+1,:,0,i].sum())) # 此处start:end+1限制取atten的范围在11 layer,逻辑是每个head中CLS对位置i的token的和(reconfirm this!!!)
+        attn_score.append(float(attn[start:end+1,:,0,i].sum()))
     return attn_score
 
 def get_real_score(attention_scores, kmer, metric):
