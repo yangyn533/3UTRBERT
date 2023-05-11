@@ -11,7 +11,6 @@ conda activate 3UTRBERT
 git clone https://github.com/yangyn533/3UTRBERT
 cd 3UTRBERT
 python3 -m pip install --editable .
-cd examples
 python3 -m pip install -r requirements.txt
 ```
 ## Process data
