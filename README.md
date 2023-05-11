@@ -7,7 +7,8 @@ conda create -n 3UTRBERT python=3.6.13
 conda activate 3UTRBERT
 ```
 #### 1.2 Install the package and other requirements
-```conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=10.2 -c pytorch
+```
+conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=10.2 -c pytorch
 git clone https://github.com/yangyn533/3UTRBERT
 cd 3UTRBERT
 python3 -m pip install --editable .
