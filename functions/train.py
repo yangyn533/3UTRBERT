@@ -40,14 +40,14 @@ from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, Tenso
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm, trange
 from data_loaders import load_and_cache_examples_3utr as load_and_cache_examples
-from data_loaders import visualize 
+from data_loaders import visualize
 
 
 from src.transformers import (
     RNATokenizer
 )
 
-from transformers import (
+from src.transformers import (
     BertConfig,
     DistilBertConfig,
     WEIGHTS_NAME,
@@ -55,7 +55,7 @@ from transformers import (
     BertForSequenceClassification,
     DistilBertForSequenceClassification,
     get_linear_schedule_with_warmup
-) 
+)
 
 from src.transformers import glue_compute_metrics as compute_metrics
 from src.transformers import glue_output_modes as output_modes
@@ -91,7 +91,7 @@ def _sorted_checkpoints(args, checkpoint_prefix="checkpoint", use_mtime=False) -
     """
     It takes a list of checkpoint files, and returns a list of checkpoint files sorted by their epoch
     number
-    
+
     :param args: The arguments that were passed to the script
     :param checkpoint_prefix: The prefix of the checkpoint files, defaults to checkpoint (optional)
     :param use_mtime: If True, the checkpoint with the latest modification time will be used. If False,
@@ -119,7 +119,7 @@ def _rotate_checkpoints(args, checkpoint_prefix="checkpoint", use_mtime=False) -
     """
     It deletes the oldest checkpoints if the number of checkpoints exceeds the `save_total_limit`
     argument
-    
+
     :param args: The arguments object that was passed to the training script
     :param checkpoint_prefix: The prefix of the checkpoint files, defaults to checkpoint (optional)
     :param use_mtime: If True, the checkpoint with the latest modification time will be returned. If
@@ -182,16 +182,16 @@ def train(args, train_dataset, model, tokenizer, run=None):
         scheduler.load_state_dict(torch.load(os.path.join(args.model_name_or_path, "scheduler.pt")))
 
 
-    # multi-gpu training 
+    # multi-gpu training
     if args.n_gpu > 1:
         model = torch.nn.DataParallel(model)
 
-    # Distributed training 
+    # Distributed training
     if args.local_rank != -1:
         model = torch.nn.parallel.DistributedDataParallel(
             model, device_ids=[args.local_rank], output_device=args.local_rank, find_unused_parameters=True,
         )
-    
+
     if args.do_visualize_during_training:
         tata_dataset = load_and_cache_examples(args, args.task_name, tokenizer, viz=True)
 
@@ -273,7 +273,7 @@ def train(args, train_dataset, model, tokenizer, run=None):
                 scheduler.step()  # Update learning rate schedule
                 model.zero_grad()
                 global_step += 1
-                
+
                 if args.local_rank in [-1, 0] and args.do_visualize_during_training and global_step % args.image_steps == 0:
                     kmer = int(args.tokenizer_name[-1])
                     attention_scores, _ = visualize(args, model, tokenizer, prefix="", kmer=kmer, pred_dataset=tata_dataset)
@@ -289,7 +289,7 @@ def train(args, train_dataset, model, tokenizer, run=None):
                     ax.set_ylabel('Sequence', fontsize=14)
                     if run is not None:
                         run["train/attention"].log(fig, step=global_step)
-                    
+
 
                 if args.local_rank in [-1, 0] and args.logging_steps > 0 and global_step % args.logging_steps == 0:
                     logs = {}
@@ -304,7 +304,7 @@ def train(args, train_dataset, model, tokenizer, run=None):
                             run["val/auc"].log(results["auc"], step=global_step)
                             run["val/precision"].log(results["precision"], step=global_step)
                             run["val/recall"].log(results["recall"], step=global_step)
-                        
+
 
                         for key, value in results.items():
                             eval_key = "eval_{}".format(key)
@@ -437,11 +437,11 @@ def main():
     parser.add_argument("--do_predict", action="store_true", help="Whether to do prediction on the given dataset.")
     parser.add_argument("--do_visualize", action="store_true", help="Whether to calculate attention score.")
 
-    # VALIDATION DURING TRAINING / EVALUATE 
+    # VALIDATION DURING TRAINING / EVALUATE
     parser.add_argument("--evaluate_during_training", action="store_true", help="Run evaluation during training at each logging step.",)
     parser.add_argument("--do_visualize_during_training", action="store_true", help="Steps to generate an image")
     parser.add_argument("--image_steps", type=int, default=0, help="Steps to generate an image")
-    
+
     # MODEL CONFIGS (only use)
 
     # TRAINING DETAILS
@@ -477,7 +477,7 @@ def main():
     parser.add_argument("--neptune_description", type=str, default="TRIAL minilm fine-tuning", help="Neptune description")
     parser.add_argument("--neptune_token", type=str, default=None, help="Neptune API token")
     parser.add_argument("--neptune_project", type=str, default=None, help="Neptune project")
-    
+
 
 
     # OTHER
@@ -567,7 +567,7 @@ def main():
     args.model_type = args.model_type.lower()
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
 
-    
+
     if not args.do_visualize:
         config = config_class.from_pretrained(
             args.config_name if args.config_name else args.model_name_or_path,
@@ -579,7 +579,7 @@ def main():
         config.hidden_dropout_prob = args.hidden_dropout_prob
         config.attention_probs_dropout_prob = args.attention_probs_dropout_prob
         config.split = int(args.max_seq_length / 512)
-        
+
 
         tokenizer = tokenizer_class.from_pretrained(
             args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,
@@ -609,7 +609,7 @@ def main():
             run = None
         global_step, tr_loss = train(args, train_dataset, model, tokenizer, run)
         logger.info(" global_step = %s, average loss = %s", global_step, tr_loss)
-    
+
 
     # Saving best-practices: if you use defaults names for the model, you can reload it using from_pretrained()
     if args.do_train and (args.local_rank == -1 or torch.distributed.get_rank() == 0):
@@ -669,7 +669,7 @@ def main():
             run["test/auc"] = results["auc_"]
             run["test/precision"] = results["precision_"]
             run["test/recall"] = results["recall_"]
-    
+
 
     return results
 

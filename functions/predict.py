@@ -40,7 +40,7 @@ from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, Tenso
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm, trange
 from data_loaders import load_and_cache_examples_3utr as load_and_cache_examples
-from data_loaders import visualize 
+from data_loaders import visualize
 
 
 from src.transformers import (
@@ -54,7 +54,7 @@ from transformers import (
     AdamW,
     BertForSequenceClassification,
     DistilBertForSequenceClassification
-) 
+)
 
 from src.transformers import glue_compute_metrics as compute_metrics
 from src.transformers import glue_output_modes as output_modes
@@ -169,11 +169,11 @@ def main():
     parser.add_argument("--do_predict", action="store_true", help="Whether to do prediction on the given dataset.")
     parser.add_argument("--do_visualize", action="store_true", help="Whether to calculate attention score.")
 
-    # VALIDATION DURING TRAINING / EVALUATE 
+    # VALIDATION DURING TRAINING / EVALUATE
     parser.add_argument("--evaluate_during_training", action="store_true", help="Run evaluation during training at each logging step.",)
     parser.add_argument("--do_visualize_during_training", action="store_true", help="Steps to generate an image")
     parser.add_argument("--image_steps", type=int, default=0, help="Steps to generate an image")
-    
+
     # MODEL CONFIGS (only use)
 
     # TRAINING DETAILS
@@ -209,7 +209,7 @@ def main():
     parser.add_argument("--neptune_description", type=str, default="TRIAL minilm fine-tuning", help="Neptune description")
     parser.add_argument("--neptune_token", type=str, default=None, help="Neptune API token")
     parser.add_argument("--neptune_project", type=str, default=None, help="Neptune project")
-    
+
 
 
     # OTHER
@@ -268,7 +268,7 @@ def main():
 
     args.model_type = args.model_type.lower()
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
-    
+
 
     # PREDICTION OF THE TEST SET + EVALUATE -----------------------------------------------------------------------------------------
     predictions = {}
@@ -277,7 +277,7 @@ def main():
         model = model_class.from_pretrained(args.model_name_or_path)
         model.to(args.device)
         prediction = predict(args, model, tokenizer)
-    
+
 
 
 if __name__ == "__main__":
