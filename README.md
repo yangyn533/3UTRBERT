@@ -56,7 +56,7 @@ python predict.py \
 --tokenizer_name rna3 \
 --model_type 3utrprom \
 --model_name_or_path <PATH_TO_YOUR_MODEL> \
---max_seg_length 100 \
+--max_seq_length 100 \
 --per_gpu_eval_batch_size 32
 ```
 Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
