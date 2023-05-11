@@ -30,10 +30,10 @@ VOCAB_FILES_NAMES = {"vocab_file": "vocab.txt"}
 
 PRETRAINED_VOCAB_FILES_MAP = {
     "vocab_file": {
-        "rna3": "/content/drive/MyDrive/github_arrangement/codes/transformers/rnabert-config/bert-config-3/vocab.txt",
-        "rna4": "/content/drive/MyDrive/github_arrangement/codes/transformers/rnabert-config/bert-config-4/vocab.txt",
-        "rna5": "/content/drive/MyDrive/github_arrangement/codes/transformers/rnabert-config/bert-config-5/vocab.txt",
-        "rna6": "/content/drive/MyDrive/github_arrangement/codes/transformers/rnabert-config/bert-config-6/vocab.txt",
+        "rna3": "https://github.com/yangyn533/3UTRBERT-1/blob/main/transformers/rnabert-config/bert-config-3/vocab.txt",
+        "rna4": "https://github.com/yangyn533/3UTRBERT-1/blob/main/transformers/rnabert-config/bert-config-4/vocab.txt",
+        "rna5": "https://github.com/yangyn533/3UTRBERT-1/blob/main/transformers/rnabert-config/bert-config-5/vocab.txt",
+        "rna6": "https://github.com/yangyn533/3UTRBERT-1/blob/main/transformers/rnabert-config/bert-config-6/vocab.txt",
     }
 }
 
