@@ -479,7 +479,7 @@ def main():
 
     parser.add_argument(
         "--window_size",
-        default=24,
+        default=7,
         type=int,
         help="Specified window size to be final motif length",
     )
@@ -493,7 +493,7 @@ def main():
 
     parser.add_argument(
         "--pval_cutoff",
-        default=0.005,
+        default=0.05,
         type=float,
         help="Cutoff FDR/p-value to declare statistical significance",
     )
