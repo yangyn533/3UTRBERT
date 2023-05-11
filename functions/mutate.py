@@ -3,6 +3,8 @@ import sys
 import pandas as pd
 import numpy as np
 import argparse
+import csv
+
 # import motif_utils as utils
 
 def kmer2seq(kmers):
@@ -78,13 +80,13 @@ def mutate(seq, start, end, target=None):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "seq_file",
+        "--seq_file",
         type=str,
         help="Path to input sequence + label .tsv file.",
     )
     
     parser.add_argument(
-        "save_file_dir",
+        "--save_file_dir",
         type=str,
         help="Path to save the mutated seqs",
     )
@@ -148,6 +150,20 @@ def main():
             
     mutated_dev.to_csv(os.path.join(args.save_file_dir,'test.tsv'),sep='\t',header=True, index=False)
     
+    with open(args.seq_file) as f:
+        tsvreader = csv.reader(f, delimiter='\t')
+        next(tsvreader)
+        modified_lines = []
+        for line in tsvreader:
+          modified_lines.append(line)
+        modified_lines.append([modified_lines[0][0], 1-int(modified_lines[0][1])])
+
+
+    with open(args.seq_file, 'w') as f:
+        tsv_w = csv.writer(f, delimiter='\t')
+        tsv_w.writerow(['sequence', 'label'])
+        tsv_w.writerows(modified_lines)
+
 
 if __name__ == "__main__":
     main()
