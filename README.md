@@ -74,6 +74,7 @@ python single_resolution_importance.py \
     --sequence <SEQUENCE_USED> \
     --save_path <PATH_TO_YOUR_OUTPUT_DIRECTORY>
 ```
+Please make sure that the input sequence does not exceed the max-length limit.
 
 ## Mutation analysis
 ```
