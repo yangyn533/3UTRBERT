@@ -9,3 +9,7 @@ biopython
 pandas
 pybedtools
 sentencepiece==0.1.91
+matplotlib
+seaborn
+python-decouple
+transformers
