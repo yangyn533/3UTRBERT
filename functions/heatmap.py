@@ -27,7 +27,7 @@ def main():
 
     args = parser.parse_args()
     
-    df = pd.read_csv(args.score_file + "/mutation.tsv", delimiter='\t')['diff']
+    df = pd.read_csv(args.score_file + "/mutations.tsv", delimiter='\t')['diff']
     row_list = df.values.tolist()
     print(row_list)
     plot_matrix = []
