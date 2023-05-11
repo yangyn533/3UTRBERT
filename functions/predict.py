@@ -53,8 +53,7 @@ from transformers import (
     WEIGHTS_NAME,
     AdamW,
     BertForSequenceClassification,
-    DistilBertForSequenceClassification,
-    get_linear_schedule_with_warmup
+    DistilBertForSequenceClassification
 ) 
 
 from src.transformers import glue_compute_metrics as compute_metrics
