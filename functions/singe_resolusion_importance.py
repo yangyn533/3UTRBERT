@@ -9,7 +9,7 @@ from tqdm import tqdm
 np.set_printoptions(threshold=np.inf)
 import math
 
-from transformers import BertModel, RNATokenizer
+from src.transformers import BertModel, RNATokenizer
 
 
 
