@@ -99,7 +99,9 @@ The following commonds comes from `mutation_heatmap.sh`.
 `MUTATE_SEQ_PATH` should be the folder your want to store the mutated sequence file (not include the file name itself). 
 `WT_SEQ` should be the same sequence in the original sequence file.
 Please store the original sequence in a `.tsv` file called `test.tsv` .
-The folder structure in example/mutation_analysis is recommended.
+The folder structure shown below is recommended.
+![image](https://github.com/yangyn533/3UTRBERT-1/blob/main/example_folder_structure_for_mutation_analysis.png)
+The example `test.tsv` file is in example `mutation_analysis/original_seq`, only one sequence is allowed to be in the file. The label for the sequence can be 0 or 1.
 ```
 export KMER=3
 export MODEL_PATH=<PATH_TO_YOUR_MODEL>
