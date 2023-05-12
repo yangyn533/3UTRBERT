@@ -1,5 +1,5 @@
 import os
-
+import argparse
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 import torch
@@ -10,7 +10,7 @@ from Bio import SeqIO
 from torch import cuda
 from torch.utils.data import DataLoader, Dataset
 from transformers import BertTokenizer, BertModel, BertConfig
-from keras.preprocessing.sequence import pad_sequences
+from keras.utils import pad_sequences
 
 
 def mk_dir(dir):
@@ -331,9 +331,7 @@ def main():
     model = model.to(device)
     model = model.eval()
 
-    train_attn = []
-    valid_attn = []
-    test_attn = []
+    train_embedding = []
     print(dataloaders.keys())
     for each_id in ["seq_to_extract"]:
         if each_id == "seq_to_extract":
@@ -352,7 +350,7 @@ def main():
                         embedding_pad = np.mean(embedding_pad, axis=1)
                         train_embedding.append(embedding_pad[:, np.newaxis])
     
-    np.save(output_path + 'seq_to_extract' + str(dataset_num) + '.npy',
+    np.save(output_path + 'seq_to_extract' + '.npy',
             np.array(train_embedding))
     print(np.array(train_embedding).shape)
 
