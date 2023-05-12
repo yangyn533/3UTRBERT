@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import argparse
 import pandas as pd
-%config InlineBackend.figure_format = "retina"
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -43,7 +43,7 @@ def main():
                 yticklabels=['A', 'U', 'G', 'C'])
     plt.xticks(fontsize=40)
     plt.yticks(fontsize=40)
-    plt.savefig(args.save_file_dir + "/heatmap.jpg")
+    plt.savefig(args.save_file_dir + "/heatmap.jpg", dpi=300)
 
 
 if __name__ == "__main__":
