@@ -14,6 +14,18 @@ cd 3UTRBERT
 python3 -m pip install --editable .
 python3 -m pip install -r requirements.txt
 ```
+If above commands do not run correctly. Following commands could be used **after running the above commands.**
+```
+pip install seaborn
+pip install transformers
+pip install pyfaidx
+pip install python-decouple
+pip install sacremoses
+pip install boto3
+pip install sentencepiece
+pip install Bio
+pip install pyahocorasick
+```
 ## Process data
 The input file is in .fasta format. For each sequence, the label of the sequence should be in the sequence ID. (example file can be dound in example_data folder).
 By running the following code, the input fasta file will be separated into train, dev and test sets. Each sequence will be tokenized into 3mer tokens. Example data locates in the example/data folder. train.tsv is for training, dev.tsv for validation and test.tsv for test the performance.
