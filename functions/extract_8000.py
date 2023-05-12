@@ -218,7 +218,7 @@ def prepare_data(data_path, dataset_num, num_labels, kmer):
 
     dataset_split = ['seq_to_extract']
     for each_item in dataset_split:
-        wholepath = data_path + each_item + str(dataset_num) + '.fasta'
+        wholepath = data_path + each_item + '.fasta'
         df_dataset = load_seq(wholepath, kmer)
         df_dataset["Label"] = df_dataset["Label"].apply(
             lambda x: list(map(int, x)))
