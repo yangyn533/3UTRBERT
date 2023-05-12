@@ -22,7 +22,7 @@ python predict.py \
   --tokenizer_name rna3 \
   --model_type 3utrprom \
   --model_name_or_path $MODEL_PATH \
-  --max_seg_length 100 \
+  --max_seq_length 100 \
   --per_gpu_eval_batch_size 32
 
 python predict.py \
@@ -32,7 +32,7 @@ python predict.py \
   --tokenizer_name rna3 \
   --model_type 3utrprom \
   --model_name_or_path $MODEL_PATH \
-  --max_seg_length 100 \
+  --max_seq_length 100 \
   --per_gpu_eval_batch_size 32
 
 
