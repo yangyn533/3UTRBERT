@@ -14,7 +14,7 @@ cd 3UTRBERT
 python3 -m pip install --editable .
 python3 -m pip install -r requirements.txt
 ```
-If above commands do not run correctly. Following commands could be used to install missing packages manually **after running the above commands.**
+If above commands do not run correctly. Following commands could be used to install missing packages manually **after running the above commands.** If you use the commands to install packages manually, above commands should be run first.
 ```
 pip install seaborn
 pip install transformers
