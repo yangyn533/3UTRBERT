@@ -98,7 +98,7 @@ export OUTPUT_PATH=<PATH_TO_YOUR_OUTPUT_DIRECTORY>
 
 
 # mutate sequence
-python mutate_seqs.py --seq_file $ORIGINAL_SEQ_PATH/test.tsv --save_file_dir $MUTATE_SEQ_PATH --k $KMER
+python mutate.py --seq_file $ORIGINAL_SEQ_PATH/test.tsv --save_file_dir $MUTATE_SEQ_PATH --k $KMER
 
 
 # predict on sequence
