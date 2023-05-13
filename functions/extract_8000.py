@@ -298,6 +298,14 @@ def main():
         required=True,
         help="path to the model folder",
     )
+    parser.add_argument(
+        "--seq_length",
+        default=None,
+        type=str,
+        required=True,
+        help="The length of sequence",
+    )
+    
     args = parser.parse_args()
     data_path = args.data_path
     output_path = args.output_path
@@ -307,7 +315,7 @@ def main():
     max_length = 512
     batch_size = 5
     num_workers = 0
-    fixed_length = 8000
+    fixed_length = args.seq_length
 
     mk_dir(output_path)
 
