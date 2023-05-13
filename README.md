@@ -159,6 +159,7 @@ python heatmap.py \
 
 
 ## Feature extraction
+`<PATH_TO_DATA>` is the path the folder that the data in (not include the data file name).
 ```
 python extract_8000.py \
     --data_path <PATH_TO_DATA> \
