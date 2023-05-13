@@ -301,7 +301,7 @@ def main():
     args = parser.parse_args()
     data_path = args.data_path
     output_path = args.output_path
-    dataset_num = 0
+
     classes = 7
     kmer = 3
     max_length = 512
@@ -331,7 +331,7 @@ def main():
     model = model.to(device)
     model = model.eval()
 
-    train_embedding = []
+    embedding = []
     print(dataloaders.keys())
     for each_id in ["seq_to_extract"]:
         if each_id == "seq_to_extract":
@@ -342,17 +342,17 @@ def main():
                         ids = each_item['ids'].to(device, dtype = torch.long)
                         mask = each_item['mask'].to(device, dtype = torch.long)
                         token_type_ids = each_item['token_type_ids'].to(device, dtype = torch.long) 
-                        outputs = model(input_ids=ids,attention_mask=mask) 
+                        outputs = model(input_ids=ids,attention_mask=mask,output_hidden_states=True) 
                         hidden_states = outputs[2]  
                         hidden_states = (hidden_states[-1] + hidden_states[1]).cpu().numpy()
                         transform_emb = remove_special_token(hidden_states, mask)
                         embedding_pad = np.pad(transform_emb, ((0,fixed_length-transform_emb.shape[0]),(0,0)), 'mean')
                         embedding_pad = np.mean(embedding_pad, axis=1)
-                        train_embedding.append(embedding_pad[:, np.newaxis])
+                        embedding.append(embedding_pad[:, np.newaxis])
     
     np.save(output_path + 'seq_to_extract' + '.npy',
-            np.array(train_embedding))
-    print(np.array(train_embedding).shape)
+            np.array(embedding))
+    print(np.array(embedding).shape)
 
 if __name__ == "__main__":
     main()
