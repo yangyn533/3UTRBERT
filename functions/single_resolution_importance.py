@@ -178,7 +178,7 @@ def main():
 
     args = parser.parse_args()
     weight = generate_attention_average(args)
-    text = ''.join([highlighter(i, weight, args.sequence) for i in range(len(args.sequence))])
+    text = ''.join([highlighter(i, weight, args.sequence.replace('T', 'U')) for i in range(len(args.sequence.replace('T', 'U'))])
     with open(args.save_path + "/single_resolution_importance.html", "w") as file:
         file.write(text)
     return weight.tolist()
