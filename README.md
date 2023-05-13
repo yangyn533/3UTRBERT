@@ -9,8 +9,8 @@ conda activate 3UTRBERT
 #### 1.2 Install the package and other requirements
 ```
 conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=10.2 -c pytorch
-git clone https://github.com/yangyn533/3UTRBERT
-cd 3UTRBERT
+git clone https://github.com/yangyn533/3UTRBERT-1
+cd 3UTRBERT-1
 python3 -m pip install --editable .
 python3 -m pip install -r requirements.txt
 ```
