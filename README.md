@@ -185,7 +185,7 @@ python heatmap.py \
 
 
 ## Feature extraction
-`<PATH_TO_DATA>` is the path the folder that the data in (not include the data file name).
+`<PATH_TO_DATA>` is the path the folder that the data in (not include the data file name). The input fasta file should be named as `seq_to_extract.fasta`. THe example data can be found in example folder.
 ```
 python extract_LS_embedding.py \
     --data_path <PATH_TO_DATA> \
