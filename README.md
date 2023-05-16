@@ -34,8 +34,8 @@ pip install pyahocorasick
 
 
 ## Process data
-The input file is in .fasta format. For each sequence, the label of the sequence should be in the sequence ID. (example file can be dound in example_data folder).
-By running the following code, the input fasta file will be separated into train, dev and test sets. Each sequence will be tokenized into 3mer tokens. Example data locates in the example/data folder. train.tsv is for training, dev.tsv for validation and test.tsv for test the performance.
+The input file is in `.fasta` format. For each sequence, the label of the sequence should be in the sequence ID. (example file can be found in example_data folder).
+By running the following code, the input fasta file will be separated into train, dev and test sets. Each sequence will be tokenized into 3mer tokens. Example data locates in the example/data folder. `train.tsv` is for training, `dev.tsv` for validation and `test.tsv` for test the performance.
 ```
 python preprocess.py \
   --data_dir <PATH_TO_YOUR_DATA> \
