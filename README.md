@@ -4,8 +4,11 @@
 
 ## Download pre-trained 3UTRBERT model
 [3UTRBERT-3mer](10.6084/m9.figshare.22847354)
+
 [3UTRBERT-4mer](10.6084/m9.figshare.22851119)
+
 [3UTRBERT-5mer](10.6084/m9.figshare.22851191)
+
 [3UTRBERT-6mer](10.6084/m9.figshare.22851272)
 
 ## Environment Setup
