@@ -175,7 +175,7 @@ python heatmap.py \
 ## Feature extraction
 `<PATH_TO_DATA>` is the path the folder that the data in (not include the data file name).
 ```
-python extract_8000.py \
+python extract_LS_embedding.py \
     --data_path <PATH_TO_DATA> \
     --output_path <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
     --model_path <PATH_TO_YOUR_MODEL>
