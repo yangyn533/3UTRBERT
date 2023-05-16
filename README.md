@@ -1,4 +1,8 @@
-# 3UTRBERT  Move transformers to src, remember to change the URL in tokenization_rna.py as https://raw.githubusercontent.com/yangyn533/3UTRBERT-1/main/transformers/rnabert-config/bert-config-3/vocab.txt
+# 3UTRBERT
+## Data availability
+[3UTRBERT_dataset](10.6084/m9.figshare.22845644)
+
+
 ## Environment Setup
 
 #### 1.1 Create and activate a new virtual environment
@@ -6,6 +10,7 @@
 conda create -n 3UTRBERT python=3.6.13 
 conda activate 3UTRBERT
 ```
+
 #### 1.2 Install the package and other requirements
 ```
 conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=10.2 -c pytorch
@@ -26,6 +31,8 @@ pip install sentencepiece
 pip install Bio
 pip install pyahocorasick
 ```
+
+
 ## Process data
 The input file is in .fasta format. For each sequence, the label of the sequence should be in the sequence ID. (example file can be dound in example_data folder).
 By running the following code, the input fasta file will be separated into train, dev and test sets. Each sequence will be tokenized into 3mer tokens. Example data locates in the example/data folder. train.tsv is for training, dev.tsv for validation and test.tsv for test the performance.
@@ -35,6 +42,8 @@ python preprocess.py \
   --output_dir <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
   --kmer 3
 ```
+
+
 ## Train
 `train.py` is used for fine-tune the model. The input data is the train.tsv and dev.tsv. Make sure train.tsv and dev.tsv are in the same directory and the input path to this directory as the `--data_dir` argument (not include the file name itself). `--model_name_or_path` needs to be the path to your pre-trained model. `--output_dir` is the location to store the fine-tuned model.
 ```
@@ -60,6 +69,8 @@ python train.py \
   --seed 6
 ```
 Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
+
+
 ## Predict
 `predict.py` is used for producing prediction results from the fine-tuned model. The input data is the test.tsv. Make sure train.tsv, dev.tsv and test.tsv are in the same directory and input path to this directory as the `--data_dir` argument (not include the file name itself). `--model_name_or_path` needs to be the path to your fine-tuned model. The output files of `predict.py` are mainly `pred_results.npy` and `pred_results_scores.npy`. `pred_results.npy` stores the probability for each sequence. `pred_results_scores.npy` stores the metrics to evaluate the model.
 ```
@@ -74,6 +85,8 @@ python predict.py \
   --per_gpu_eval_batch_size 32
 ```
 Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
+
+
 ## Single resolution importance analysis
 The following code extracted the attention scores and visualizes them.
 ```
@@ -87,6 +100,7 @@ python single_resolution_importance.py \
     --save_path <PATH_TO_YOUR_OUTPUT_DIRECTORY>
 ```
 Please make sure that the input sequence does not exceed the max-length limit.
+
 
 ## Mutation analysis
 Before run the shell script. Make sure the parameters in the shell script are indicated.
@@ -166,6 +180,8 @@ python extract_8000.py \
     --output_path <PATH_TO_YOUR_OUTPUT_DIRECTORY> \
     --model_path <PATH_TO_YOUR_MODEL>
 ```
+
+
 ## Motif analysis
 The motif analysis requires the output of attentions. The required attention can be obtained from `single_resolution_importance.py`. Store the attention into the directory used as input `--predict_dir`.
 ```
