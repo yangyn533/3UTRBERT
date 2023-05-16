@@ -19,7 +19,9 @@ cd 3UTRBERT-1
 python3 -m pip install --editable .
 python3 -m pip install -r requirements.txt
 ```
+
 If above commands do not run correctly. Following commands could be used to install missing packages manually **after running the above commands.** If you use the commands to install packages manually, above commands should be run first.
+
 ```
 pip install seaborn
 pip install transformers
@@ -45,7 +47,7 @@ python preprocess.py \
 
 
 ## Train
-`train.py` is used for fine-tune the model. The input data is the train.tsv and dev.tsv. Make sure train.tsv and dev.tsv are in the same directory and the input path to this directory as the `--data_dir` argument (not include the file name itself). `--model_name_or_path` needs to be the path to your pre-trained model. `--output_dir` is the location to store the fine-tuned model.
+`train.py` is used for fine-tune the model. The input data are `train.tsv` and `dev.tsv`. Make sure `train.tsv` and `dev.tsv` are in the same directory and the input path to this directory as the `--data_dir` argument (not include the file name itself). `--model_name_or_path` needs to be the path to your pre-trained model. `--output_dir` is the location to store the fine-tuned model.
 ```
 python train.py \
   --data_dir <PATH_TO_YOUR_DATA> \
@@ -72,7 +74,7 @@ Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the km
 
 
 ## Predict
-`predict.py` is used for producing prediction results from the fine-tuned model. The input data is the test.tsv. Make sure train.tsv, dev.tsv and test.tsv are in the same directory and input path to this directory as the `--data_dir` argument (not include the file name itself). `--model_name_or_path` needs to be the path to your fine-tuned model. The output files of `predict.py` are mainly `pred_results.npy` and `pred_results_scores.npy`. `pred_results.npy` stores the probability for each sequence. `pred_results_scores.npy` stores the metrics to evaluate the model.
+`predict.py` is used for producing prediction results from the fine-tuned model. The input data is the `test.tsv`. Make sure `train.tsv`, `dev.tsv` and `test.tsv` are in the same directory and input path to this directory as the `--data_dir` argument (not include the file name itself). `--model_name_or_path` needs to be the path to your fine-tuned model. The output files of `predict.py` are mainly `pred_results.npy` and `pred_results_scores.npy`. `pred_results.npy` stores the probability for each sequence. `pred_results_scores.npy` stores the metrics to evaluate the model.
 ```
 python predict.py \
   --data_dir <PATH_TO_YOUR_DATA> \
