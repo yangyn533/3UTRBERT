@@ -1,15 +1,15 @@
 # 3UTRBERT
 ## Data availability
-[3UTRBERT_dataset](10.6084/m9.figshare.22845644)
+[3UTRBERT_dataset](https://figshare.com/articles/dataset/3UTRBERT_dataset_availability/22845644)
 
 ## Download pre-trained 3UTRBERT model
-[3UTRBERT-3mer](10.6084/m9.figshare.22847354)
+[3UTRBERT-3mer](https://figshare.com/articles/software/Pre-trained_3mer_model/22847354)
 
-[3UTRBERT-4mer](10.6084/m9.figshare.22851119)
+[3UTRBERT-4mer](https://figshare.com/articles/software/Pre-trained_4mer_model/22851119)
 
-[3UTRBERT-5mer](10.6084/m9.figshare.22851191)
+[3UTRBERT-5mer](https://figshare.com/articles/software/Pre-trained_5mer_model/22851191)
 
-[3UTRBERT-6mer](10.6084/m9.figshare.22851272)
+[3UTRBERT-6mer](https://figshare.com/articles/software/Pre-trained_6mer_model/22851272)
 
 ## Environment Setup
 
