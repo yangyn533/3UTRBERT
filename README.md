@@ -1,8 +1,8 @@
 # 3UTRBERT
-## Data availability
+## ⌛️ Data availability
 [3UTRBERT_dataset](https://figshare.com/articles/dataset/3UTRBERT_dataset_availability/22845644)
 
-## Download pre-trained 3UTRBERT model
+## ⌛️ Download pre-trained 3UTRBERT model
 [3UTRBERT-3mer](https://figshare.com/articles/software/Pre-trained_3mer_model/22847354)
 
 [3UTRBERT-4mer](https://figshare.com/articles/software/Pre-trained_4mer_model/22851119)
@@ -11,7 +11,7 @@
 
 [3UTRBERT-6mer](https://figshare.com/articles/software/Pre-trained_6mer_model/22851272)
 
-## Environment Setup
+## 📘 Environment Setup
 
 #### 1.1 Create and activate a new virtual environment
 ```
@@ -43,7 +43,7 @@ pip install pyahocorasick
 ```
 
 
-## Process data
+## ⌛️ Process data
 The input file is in `.fasta` format. For each sequence, the label of the sequence should be in the sequence ID. (example file can be found in example_data folder).
 By running the following code, the input fasta file will be separated into train, dev and test sets. Each sequence will be tokenized into 3mer tokens. Example data locates in the example/data folder. `train.tsv` is for training, `dev.tsv` for validation and `test.tsv` for test the performance.
 ```
@@ -54,7 +54,7 @@ python preprocess.py \
 ```
 
 
-## Train
+## ⌛️ Train
 `train.py` is used for fine-tune the model. The input data are `train.tsv` and `dev.tsv`. Make sure `train.tsv` and `dev.tsv` are in the same directory and the input path to this directory as the `--data_dir` argument (not include the file name itself). `--model_name_or_path` needs to be the path to your pre-trained model. `--output_dir` is the location to store the fine-tuned model.
 ```
 python train.py \
@@ -81,7 +81,7 @@ python train.py \
 Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
 
 
-## Predict
+## ⌛️ Predict
 `predict.py` is used for producing prediction results from the fine-tuned model. The input data is the `test.tsv`. Make sure `train.tsv`, `dev.tsv` and `test.tsv` are in the same directory and input path to this directory as the `--data_dir` argument (not include the file name itself). `--model_name_or_path` needs to be the path to your fine-tuned model. The output files of `predict.py` are mainly `pred_results.npy` and `pred_results_scores.npy`. `pred_results.npy` stores the probability for each sequence. `pred_results_scores.npy` stores the metrics to evaluate the model.
 ```
 python predict.py \
@@ -97,7 +97,7 @@ python predict.py \
 Please change the tokenizer name { rna3, rna4, rna5, rna6 } when changing the kmer choice.
 
 
-## Single resolution importance analysis
+## 📊 Single resolution importance analysis
 The following code extracted the attention scores and visualizes them.
 ```
 python single_resolution_importance.py \
@@ -112,7 +112,7 @@ python single_resolution_importance.py \
 Please make sure that the input sequence does not exceed the max-length limit.
 
 
-## Mutation analysis
+## 📊 Mutation analysis
 Before run the shell script. Make sure the parameters in the shell script are indicated.
 ```
 source mutation_heatmap.sh
@@ -184,7 +184,7 @@ python heatmap.py \
 ```
 
 
-## Feature extraction
+## 📊 Feature extraction
 `<PATH_TO_DATA>` is the path the folder that the data in (not include the data file name). The input fasta file should be named as `seq_to_extract.fasta`. THe example data can be found in example folder.
 ```
 python extract_LS_embedding.py \
@@ -194,7 +194,7 @@ python extract_LS_embedding.py \
 ```
 
 
-## Motif analysis
+## 🧬 Motif analysis
 The motif analysis requires the output of attentions. The required attention can be obtained from `single_resolution_importance.py`. Store the attention into the directory used as input `--predict_dir`.
 ```
 python find_motifs.py \
