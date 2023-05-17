@@ -1,5 +1,5 @@
-![image](https://github.com/yangyn533/3UTRBERT-1/blob/main/example_folder_structure_for_mutation_analysis.png)
-# 3UTRBERT
+
+# 3UTRBERT ![image](https://github.com/yangyn533/3UTRBERT/blob/main/3UTRBERT.png)
 ## ⌛️ Data availability
 [3UTRBERT_dataset](https://figshare.com/articles/dataset/3UTRBERT_dataset_availability/22845644)
 
