@@ -8,7 +8,7 @@ statsmodels
 biopython
 pandas
 pybedtools
-sentencepiece==0.1.91
+sentencepiece
 matplotlib
 seaborn
 python-decouple
