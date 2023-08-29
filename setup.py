@@ -57,8 +57,10 @@ setup(
     keywords="NLP deep learning transformer pytorch tensorflow RNA 3utr bert",
     license="MIT",
     url="https://github.com/yangyn533/3UTRBERT",
-    package_dir={"": "utrbert"},
-    packages=find_packages("utrbert"),
+   #  package_dir={"": "functions"},
+   #  packages=find_packages("functions"),
+    package_dir={"": "."},
+    packages=find_packages("."),   
     install_requires=[
         "tensorboardX",
         "tensorboard",
@@ -77,7 +79,8 @@ setup(
         "transformers",
         "pyfaidx",
         "boto3",
-        
+         "sacremoses",
+         "Bio",
     ],
     python_requires=">=3.5.0",
     classifiers=[
@@ -97,3 +100,14 @@ setup(
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],
 )
+
+
+# pip install seaborn
+# pip install transformers
+# pip install pyfaidx
+# pip install python-decouple
+# pip install sacremoses
+# pip install boto3
+# pip install sentencepiece
+# pip install Bio
+# pip install pyahocorasick

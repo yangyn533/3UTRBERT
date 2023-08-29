@@ -12,6 +12,6 @@ sentencepiece
 matplotlib
 seaborn
 python-decouple
-transformers
 pyfaidx
 boto3
+sacremoses
