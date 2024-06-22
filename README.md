@@ -1,7 +1,7 @@
 
 # ![image](https://github.com/yangyn533/3UTRBERT/blob/main/3UTRBERT.png)
 ## ⌛️ Data availability
-[3UTRBERT_dataset](https://figshare.com/articles/dataset/3UTRBERT_dataset_availability/22845644)
+[3UTRBERT_dataset](https://doi.org/10.6084/m9.figshare.26082916.v1)
 
 ## ⌛️ Download pre-trained 3UTRBERT model
 [3UTRBERT-3mer](https://figshare.com/articles/software/Pre-trained_3mer_model/22847354)
